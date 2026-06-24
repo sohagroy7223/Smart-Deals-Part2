@@ -1,6 +1,7 @@
 import { use } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../Context/AuthContext";
+import axios from "axios";
 
 const CreateProduct = () => {
   const { user } = use(AuthContext);
@@ -52,17 +53,11 @@ const CreateProduct = () => {
       status: "pending",
     };
 
-    fetch(`http://localhost:3000/myProducts?email=${email}`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(newProduct),
-    })
-      .then((res) => res.json())
+    axios
+      .post(`http://localhost:3000/myProducts?email=${email}`, newProduct)
       .then((data) => {
-        // console.log("after fetching", data);
-        if (data.insertedId) {
+        // console.log("axios post data", data);
+        if (data.data.insertedId) {
           Swal.fire({
             position: "center",
             icon: "success",
@@ -73,6 +68,28 @@ const CreateProduct = () => {
           e.target.reset();
         }
       });
+
+    // fetch(`http://localhost:3000/myProducts?email=${email}`, {
+    //   method: "POST",
+    //   headers: {
+    //     "content-type": "application/json",
+    //   },
+    //   body: JSON.stringify(newProduct),
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     // console.log("after fetching", data);
+    //     if (data.insertedId) {
+    //       Swal.fire({
+    //         position: "center",
+    //         icon: "success",
+    //         title: "Your product create has been success",
+    //         showConfirmButton: false,
+    //         timer: 1500,
+    //       });
+    //       e.target.reset();
+    //     }
+    //   });
   };
 
   return (

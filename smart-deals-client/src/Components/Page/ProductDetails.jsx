@@ -36,7 +36,7 @@ const ProductDetails = () => {
     axios
       .get(`http://localhost:3000/products/bids/${productId}`)
       .then((data) => {
-        console.log(data.data);
+        // console.log(data.data);
         setBids(data.data);
       });
   }, [productId]);
