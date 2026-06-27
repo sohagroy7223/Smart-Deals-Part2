@@ -1,10 +1,12 @@
 import { use } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../Context/AuthContext";
-import axios from "axios";
+// import axios from "axios";
+import useAxios from "../Hook/useAxios";
 
 const CreateProduct = () => {
   const { user } = use(AuthContext);
+  const axiosInstance = useAxios();
   // console.log(user);
   const handelCreateProduct = (e) => {
     e.preventDefault();
@@ -53,8 +55,8 @@ const CreateProduct = () => {
       status: "pending",
     };
 
-    axios
-      .post(`http://localhost:3000/myProducts?email=${email}`, newProduct)
+    axiosInstance
+      .post(`/myProducts?email=${email}`, newProduct)
       .then((data) => {
         // console.log("axios post data", data);
         if (data.data.insertedId) {

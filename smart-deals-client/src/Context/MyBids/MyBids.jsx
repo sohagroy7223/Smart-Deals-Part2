@@ -8,7 +8,7 @@ const MyBids = () => {
   const { user } = use(AuthContext);
   const [bids, setBids] = useState([]);
 
-  // console.log(user);
+  // console.log(user.accessToken);
 
   useEffect(() => {
     if (user?.email) {
