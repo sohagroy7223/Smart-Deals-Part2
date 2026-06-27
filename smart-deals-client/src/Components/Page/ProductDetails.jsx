@@ -3,10 +3,11 @@ import { IoIosArrowRoundBack } from "react-icons/io";
 import { use, useEffect, useRef, useState } from "react";
 import { AuthContext } from "../../Context/AuthContext";
 import Swal from "sweetalert2";
-import axios from "axios";
+import useAxiosSecure from "../Hook/useAxiosSecure";
 
 const ProductDetails = () => {
   const [bids, setBids] = useState([]);
+  const axiosSecure = useAxiosSecure();
 
   const { user } = use(AuthContext);
   const navigate = useNavigate();
@@ -33,13 +34,11 @@ const ProductDetails = () => {
   // console.log(data);
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:3000/products/bids/${productId}`)
-      .then((data) => {
-        // console.log(data.data);
-        setBids(data.data);
-      });
-  }, [productId]);
+    axiosSecure.get(`/products/bids/${productId}`).then((data) => {
+      console.log("after please bid", data.data);
+      setBids(data.data);
+    });
+  }, [productId, axiosSecure]);
 
   // useEffect(() => {
   //   fetch(`http://localhost:3000/products/bids/${productId}`)
