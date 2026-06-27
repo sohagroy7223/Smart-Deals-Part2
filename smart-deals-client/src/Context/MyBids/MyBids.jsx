@@ -13,12 +13,10 @@ const MyBids = () => {
   // console.log(user.accessToken);
 
   useEffect(() => {
-    if (user?.email) {
-      axiosSecure.get(`/bids?email=${user.email}`).then((data) => {
-        // console.log("all bids is here", data.data);
-        setBids(data.data);
-      });
-    }
+    axiosSecure.get(`/bids?email=${user.email}`).then((data) => {
+      // console.log("all bids is here", data.data);
+      setBids(data.data);
+    });
   }, [user, axiosSecure]);
 
   // useEffect(() => {
@@ -93,17 +91,17 @@ const MyBids = () => {
                   <div className="flex items-center gap-3">
                     <div className="avatar">
                       <div className="mask mask-squircle h-12 w-12">
-                        <img src="product img" alt="" />
+                        <img src={bid.image} alt="" />
                       </div>
                     </div>
                     <div>
-                      <div className="font-bold">Product name</div>
+                      <div className="font-bold">{bid.product}</div>
                       <div className="text-sm opacity-50">product price</div>
                     </div>
                   </div>
                 </td>
                 <td>
-                  Seller name
+                  {bid.buyer_name}
                   <br />
                   <span className="badge badge-ghost badge-sm">
                     {bid.buyer_email}

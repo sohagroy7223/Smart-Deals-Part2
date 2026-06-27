@@ -35,7 +35,7 @@ const ProductDetails = () => {
 
   useEffect(() => {
     axiosSecure.get(`/products/bids/${productId}`).then((data) => {
-      console.log("after please bid", data.data);
+      // console.log("after please bid", data.data);
       setBids(data.data);
     });
   }, [productId, axiosSecure]);
@@ -65,6 +65,7 @@ const ProductDetails = () => {
       buyer_email: email,
       buyer_image: user?.photoURL,
       bid_price: Bids,
+      image: image,
       status: "pending",
     };
     fetch("http://localhost:3000/bids", {
@@ -76,7 +77,7 @@ const ProductDetails = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("after fetching data", data);
+        // console.log("after fetching data", data);
         modelRef.current.close();
         if (data.insertedId) {
           Swal.fire({
