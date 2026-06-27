@@ -2,23 +2,32 @@ import { use } from "react";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../Context/AuthContext";
+import useAxiosSecure from "../Hook/useAxiosSecure";
 
 const MyProducts = () => {
+  const axiosSecure = useAxiosSecure();
   const [myProducts, setMyProducts] = useState([]);
   const { user } = use(AuthContext);
   // console.log(user);
   useEffect(() => {
-    fetch(`http://localhost:3000/myProducts?email=${user.email}`, {
-      headers: {
-        authorization: `bearer ${user.accessToken}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        // console.log("after fetching", data);
-        setMyProducts(data);
-      });
-  }, [user]);
+    axiosSecure.get(`/myProducts?email=${user.email}`).then((data) => {
+      // console.log("use axios secure", data.data);
+      setMyProducts(data.data);
+    });
+  }, [user, axiosSecure]);
+
+  // useEffect(() => {
+  //   fetch(`http://localhost:3000/myProducts?email=${user.email}`, {
+  //     headers: {
+  //       authorization: `bearer ${user.accessToken}`,
+  //     },
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       // console.log("after fetching", data);
+  //       setMyProducts(data);
+  //     });
+  // }, [user]);
 
   const handelDeleteProduct = (_id) => {
     Swal.fire({

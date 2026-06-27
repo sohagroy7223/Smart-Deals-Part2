@@ -1,12 +1,14 @@
 import { use } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../Context/AuthContext";
+import useAxiosSecure from "../Hook/useAxiosSecure";
 // import axios from "axios";
-import useAxios from "../Hook/useAxios";
+// import useAxios from "../Hook/useAxios";
 
 const CreateProduct = () => {
   const { user } = use(AuthContext);
-  const axiosInstance = useAxios();
+  // const axiosInstance = useAxios();
+  const axiosSecure = useAxiosSecure();
   // console.log(user);
   const handelCreateProduct = (e) => {
     e.preventDefault();
@@ -55,21 +57,20 @@ const CreateProduct = () => {
       status: "pending",
     };
 
-    axiosInstance
-      .post(`/myProducts?email=${email}`, newProduct)
-      .then((data) => {
-        // console.log("axios post data", data);
-        if (data.data.insertedId) {
-          Swal.fire({
-            position: "center",
-            icon: "success",
-            title: "Your product create has been success",
-            showConfirmButton: false,
-            timer: 1500,
-          });
-          e.target.reset();
-        }
-      });
+    // axiosInstance   //without headers call this function
+    axiosSecure.post(`/myProducts?email=${email}`, newProduct).then((data) => {
+      console.log("axios post data", data.data);
+      if (data.data.insertedId) {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Your product create has been success",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        e.target.reset();
+      }
+    });
 
     // fetch(`http://localhost:3000/myProducts?email=${email}`, {
     //   method: "POST",

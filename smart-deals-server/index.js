@@ -100,7 +100,8 @@ async function run() {
     });
 
     // MyProducts APIS
-    app.post("/myProducts", async (req, res) => {
+    app.post("/myProducts", verifiedFirebaseToken, async (req, res) => {
+      console.log("headers in the post", req.headers);
       const newProducts = req.body;
       const result = await myProductsCollection.insertOne(newProducts);
       res.send(result);
