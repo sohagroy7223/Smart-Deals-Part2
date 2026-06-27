@@ -47,26 +47,26 @@ const verifiedFirebaseToken = async (req, res, next) => {
   }
 };
 
-// const verifiedJWTToken = async (req, res, next) => {
-//   console.log("headers in middleware", req.headers);
-//   const authorization = req.headers.authorization;
-//   if (!authorization) {
-//     return res.status(401).send({ message: "unAuthorization access" });
-//   }
-//   const token = req.headers.authorization.split(" ")[1];
-//   if (!token) {
-//     return res.status(401).send({ message: "unAuthorization access" });
-//   }
+const verifiedJWTToken = async (req, res, next) => {
+  console.log("headers in middleware", req.headers);
+  const authorization = req.headers.authorization;
+  if (!authorization) {
+    return res.status(401).send({ message: "unAuthorization access" });
+  }
+  const token = req.headers.authorization.split(" ")[1];
+  if (!token) {
+    return res.status(401).send({ message: "unAuthorization access" });
+  }
 
-//   jwt.verify(token, process.env.JWT_SECRET, (error, decoded) => {
-//     if (error) {
-//       return res.status(401).send({ message: "unAuthorization access" });
-//     }
-//     console.log(decoded);
-//     req.token_email = decoded.email;
-//     next();
-//   });
-// };
+  jwt.verify(token, process.env.JWT_SECRET, (error, decoded) => {
+    if (error) {
+      return res.status(401).send({ message: "unAuthorization access" });
+    }
+    console.log(decoded);
+    req.token_email = decoded.email;
+    next();
+  });
+};
 
 // uri
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@crud-practice-cluster.l3ixzxm.mongodb.net/?appName=crud-practice-cluster`;
@@ -100,8 +100,7 @@ async function run() {
     });
 
     // MyProducts APIS
-    app.post("/myProducts", verifiedFirebaseToken, async (req, res) => {
-      console.log("headers in the post", req.headers);
+    app.post("/myProducts", async (req, res) => {
       const newProducts = req.body;
       const result = await myProductsCollection.insertOne(newProducts);
       res.send(result);
@@ -229,7 +228,7 @@ async function run() {
 
     // BIDS RELATED APIS with authentication firebase
 
-    app.get("/bids", verifiedFirebaseToken, async (req, res) => {
+    app.get("/bids", verifiedJWTToken, async (req, res) => {
       const email = req.query.email;
       const query = {};
       if (email) {
