@@ -9,7 +9,12 @@ const port = process.env.PORT || 3000;
 const { initializeApp, cert } = require("firebase-admin/app");
 const { getAuth } = require("firebase-admin/auth");
 
-const serviceAccount = require("./smart-deals-firebase-admin-key.json");
+// index.js
+const decoded = Buffer.from(
+  process.env.FIREBASE_SERVICE_KEY,
+  "base64",
+).toString("utf8");
+const serviceAccount = JSON.parse(decoded);
 
 initializeApp({
   credential: cert(serviceAccount),
@@ -294,7 +299,7 @@ async function run() {
       res.send(result);
     });
 
-    await client.db("admin").command({ ping: 1 });
+    // await client.db("admin").command({ ping: 1 });
     console.log(
       "Pinged your deployment. You successfully connected to MongoDB!",
     );
@@ -307,6 +312,8 @@ app.get("/", (req, res) => {
   res.send("smart server is running");
 });
 
-app.listen(port, () => {
-  console.log(`smart server is running on this port : ${port}`);
-});
+// app.listen(port, () => {
+//   console.log(`smart server is running on this port : ${port}`);
+// });
+
+module.exports = app;
