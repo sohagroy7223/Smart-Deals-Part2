@@ -4,8 +4,7 @@ import { use, useEffect } from "react";
 import { useNavigate } from "react-router";
 
 const instance = axios.create({
-  baseURL:
-    "https://smart-deals-point-11r9jx0nu-sohagroy7223-3827s-projects.vercel.app",
+  baseURL: "https://smart-deals-point.vercel.app",
 });
 const useAxiosSecure = () => {
   const { user, logOut } = use(AuthContext);

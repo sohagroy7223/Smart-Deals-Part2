@@ -1,8 +1,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL:
-    "https://smart-deals-point-11r9jx0nu-sohagroy7223-3827s-projects.vercel.app",
+  baseURL: "https://smart-deals-point.vercel.app",
 });
 
 const useAxios = () => {

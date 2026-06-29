@@ -72,7 +72,7 @@ const CreateProduct = () => {
       }
     });
 
-    // fetch(`https://smart-deals-point-11r9jx0nu-sohagroy7223-3827s-projects.vercel.app/myProducts?email=${email}`, {
+    // fetch(`https://smart-deals-point.vercel.app/myProducts?email=${email}`, {
     //   method: "POST",
     //   headers: {
     //     "content-type": "application/json",
