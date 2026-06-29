@@ -72,7 +72,7 @@ const CreateProduct = () => {
       }
     });
 
-    // fetch(`http://localhost:3000/myProducts?email=${email}`, {
+    // fetch(`https://smart-deals-point.vercel.app/myProducts?email=${email}`, {
     //   method: "POST",
     //   headers: {
     //     "content-type": "application/json",

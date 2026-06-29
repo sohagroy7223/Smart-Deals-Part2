@@ -20,7 +20,7 @@ const Login = () => {
         };
         // send user in database
 
-        fetch("http://localhost:3000/users", {
+        fetch("https://smart-deals-point.vercel.app/users", {
           method: "POST",
           headers: {
             "content-type": "application/json",

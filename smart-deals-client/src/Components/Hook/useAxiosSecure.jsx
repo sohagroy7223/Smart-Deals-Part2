@@ -4,7 +4,7 @@ import { use, useEffect } from "react";
 import { useNavigate } from "react-router";
 
 const instance = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "https://smart-deals-point.vercel.app",
 });
 const useAxiosSecure = () => {
   const { user, logOut } = use(AuthContext);
@@ -19,7 +19,7 @@ const useAxiosSecure = () => {
       return config;
     });
 
-    instance.interceptors.response.use(
+    const responseInterceptor = instance.interceptors.response.use(
       (res) => {
         return res;
       },
@@ -35,6 +35,7 @@ const useAxiosSecure = () => {
 
     return () => {
       instance.interceptors.request.eject(requestInterceptor);
+      instance.interceptors.response.eject(responseInterceptor);
     };
   }, [user, navigate, logOut]);
 

@@ -29,7 +29,7 @@ const AuthProvider = ({ children }) => {
   };
 
   const logOut = () => {
-    setLoading(true);
+    // setLoading(true);
     return signOut(auth);
   };
 
@@ -38,7 +38,7 @@ const AuthProvider = ({ children }) => {
       setUser(currentUser);
       if (currentUser) {
         const loggedUser = { email: currentUser.email };
-        fetch("http://localhost:3000/getToken", {
+        fetch("https://smart-deals-point.vercel.appgetToken", {
           method: "POST",
           headers: {
             "content-type": "application/json",

@@ -16,6 +16,8 @@ const decoded = Buffer.from(
 ).toString("utf8");
 const serviceAccount = JSON.parse(decoded);
 
+// console.log(serviceAccount, decoded);
+
 initializeApp({
   credential: cert(serviceAccount),
 });
@@ -87,6 +89,8 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     await client.connect();
+
+    console.log("MongoDB Connected Successfully");
 
     const smartDb = client.db("smartDb");
 
@@ -233,7 +237,7 @@ async function run() {
 
     // BIDS RELATED APIS with authentication firebase
 
-    app.get("/bids", verifiedJWTToken, async (req, res) => {
+    app.get("/bids", verifiedFirebaseToken, async (req, res) => {
       const email = req.query.email;
       const query = {};
       if (email) {
@@ -278,11 +282,11 @@ async function run() {
     });
 
     // find all user data
-    app.get("/bids", async (req, res) => {
-      const cursor = bidsCollection.find();
-      const result = await cursor.toArray();
-      res.send(result);
-    });
+    // app.get("/bids", async (req, res) => {
+    //   const cursor = bidsCollection.find();
+    //   const result = await cursor.toArray();
+    //   res.send(result);
+    // });
 
     // find single user data
     app.get("/bids/:id", async (req, res) => {
@@ -306,14 +310,15 @@ async function run() {
   } finally {
   }
 }
-run().catch(console.dir);
+// run().catch(console.dir);
+run().catch((err) => {
+  console.error(err);
+});
 
 app.get("/", (req, res) => {
   res.send("smart server is running");
 });
 
-// app.listen(port, () => {
-//   console.log(`smart server is running on this port : ${port}`);
-// });
-
-module.exports = app;
+app.listen(port, () => {
+  console.log(`smart server is running on this port : ${port}`);
+});

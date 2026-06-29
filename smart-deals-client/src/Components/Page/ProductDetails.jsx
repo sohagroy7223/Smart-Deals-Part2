@@ -41,7 +41,7 @@ const ProductDetails = () => {
   }, [productId, axiosSecure]);
 
   // useEffect(() => {
-  //   fetch(`http://localhost:3000/products/bids/${productId}`)
+  //   fetch(`https://smart-deals-point.vercel.app/products/bids/${productId}`)
   //     .then((res) => res.json())
   //     .then((data) => {
   //       // console.log("bids for this products", data);
@@ -68,7 +68,7 @@ const ProductDetails = () => {
       image: image,
       status: "pending",
     };
-    fetch("http://localhost:3000/bids", {
+    fetch("https://smart-deals-point.vercel.app/bids", {
       method: "POST",
       headers: {
         "content-type": "application/json",

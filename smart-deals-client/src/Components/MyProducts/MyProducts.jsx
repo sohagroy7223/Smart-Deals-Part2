@@ -17,7 +17,7 @@ const MyProducts = () => {
   }, [user, axiosSecure]);
 
   // useEffect(() => {
-  //   fetch(`http://localhost:3000/myProducts?email=${user.email}`, {
+  //   fetch(`https://smart-deals-point.vercel.app/myProducts?email=${user.email}`, {
   //     headers: {
   //       authorization: `bearer ${user.accessToken}`,
   //     },
@@ -40,7 +40,7 @@ const MyProducts = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/myProducts/${_id}`, {
+        fetch(`https://smart-deals-point.vercel.app/myProducts/${_id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
