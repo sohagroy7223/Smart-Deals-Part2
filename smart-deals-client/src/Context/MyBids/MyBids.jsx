@@ -21,7 +21,7 @@ const MyBids = () => {
 
   // useEffect(() => {
   //   if (user?.email) {
-  //     fetch(`https://smart-deals-point.vercel.app/bids?email=${user.email}`, {
+  //     fetch(`https://smart-deals-point-11r9jx0nu-sohagroy7223-3827s-projects.vercel.app/bids?email=${user.email}`, {
   //       headers: {
   //         authorization: `bearer ${user.accessToken}`,
   //       },
@@ -45,9 +45,12 @@ const MyBids = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed)
-        fetch(`https://smart-deals-point.vercel.app/bids/${_id}`, {
-          method: "DELETE",
-        })
+        fetch(
+          `https://smart-deals-point-11r9jx0nu-sohagroy7223-3827s-projects.vercel.app/bids/${_id}`,
+          {
+            method: "DELETE",
+          },
+        )
           .then((res) => res.json())
           .then((data) => {
             // console.log("after delete", data);

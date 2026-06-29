@@ -38,13 +38,16 @@ const AuthProvider = ({ children }) => {
       setUser(currentUser);
       if (currentUser) {
         const loggedUser = { email: currentUser.email };
-        fetch("https://smart-deals-point.vercel.appgetToken", {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
+        fetch(
+          "https://smart-deals-point-11r9jx0nu-sohagroy7223-3827s-projects.vercel.appgetToken",
+          {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(loggedUser),
           },
-          body: JSON.stringify(loggedUser),
-        })
+        )
           .then((res) => res.json())
           .then((data) => {
             // console.log("after get token", data.token);

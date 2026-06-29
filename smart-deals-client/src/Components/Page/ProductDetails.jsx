@@ -41,7 +41,7 @@ const ProductDetails = () => {
   }, [productId, axiosSecure]);
 
   // useEffect(() => {
-  //   fetch(`https://smart-deals-point.vercel.app/products/bids/${productId}`)
+  //   fetch(`https://smart-deals-point-11r9jx0nu-sohagroy7223-3827s-projects.vercel.app/products/bids/${productId}`)
   //     .then((res) => res.json())
   //     .then((data) => {
   //       // console.log("bids for this products", data);
@@ -68,13 +68,16 @@ const ProductDetails = () => {
       image: image,
       status: "pending",
     };
-    fetch("https://smart-deals-point.vercel.app/bids", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
+    fetch(
+      "https://smart-deals-point-11r9jx0nu-sohagroy7223-3827s-projects.vercel.app/bids",
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(newBid),
       },
-      body: JSON.stringify(newBid),
-    })
+    )
       .then((res) => res.json())
       .then((data) => {
         // console.log("after fetching data", data);

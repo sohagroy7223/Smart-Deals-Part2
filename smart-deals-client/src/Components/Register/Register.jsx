@@ -39,13 +39,16 @@ const Register = () => {
           });
 
         // create user in the database
-        fetch("https://smart-deals-point.vercel.app/users", {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
+        fetch(
+          "https://smart-deals-point-11r9jx0nu-sohagroy7223-3827s-projects.vercel.app/users",
+          {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(newUsers),
           },
-          body: JSON.stringify(newUsers),
-        })
+        )
           .then((res) => res.json())
           .then((data) => {
             // console.log("after save user data in database", data);

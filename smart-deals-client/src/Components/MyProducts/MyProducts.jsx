@@ -17,7 +17,7 @@ const MyProducts = () => {
   }, [user, axiosSecure]);
 
   // useEffect(() => {
-  //   fetch(`https://smart-deals-point.vercel.app/myProducts?email=${user.email}`, {
+  //   fetch(`https://smart-deals-point-11r9jx0nu-sohagroy7223-3827s-projects.vercel.app/myProducts?email=${user.email}`, {
   //     headers: {
   //       authorization: `bearer ${user.accessToken}`,
   //     },
@@ -40,9 +40,12 @@ const MyProducts = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://smart-deals-point.vercel.app/myProducts/${_id}`, {
-          method: "DELETE",
-        })
+        fetch(
+          `https://smart-deals-point-11r9jx0nu-sohagroy7223-3827s-projects.vercel.app/myProducts/${_id}`,
+          {
+            method: "DELETE",
+          },
+        )
           .then((res) => res.json())
           .then((data) => {
             if (data.deletedCount) {

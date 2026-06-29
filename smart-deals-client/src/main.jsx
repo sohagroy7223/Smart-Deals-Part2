@@ -27,7 +27,10 @@ const router = createBrowserRouter([
       },
       {
         path: "/allProducts",
-        loader: () => fetch("https://smart-deals-point.vercel.app/Products/"),
+        loader: () =>
+          fetch(
+            "https://smart-deals-point-11r9jx0nu-sohagroy7223-3827s-projects.vercel.app/Products/",
+          ),
         Component: AllProducts,
       },
       {
@@ -41,7 +44,9 @@ const router = createBrowserRouter([
       {
         path: "/productDetails/:id",
         loader: ({ params }) =>
-          fetch(`https://smart-deals-point.vercel.app/products/${params.id}`),
+          fetch(
+            `https://smart-deals-point-11r9jx0nu-sohagroy7223-3827s-projects.vercel.app/products/${params.id}`,
+          ),
         element: (
           <PrivateRoutes>
             <ProductDetails></ProductDetails>
